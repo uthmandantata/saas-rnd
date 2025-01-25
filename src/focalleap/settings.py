@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,11 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@x8m(o-zpr7-jr)%nfqi8j$3&6(32=3im*^_93sn^xsil+17&p'
-
+SECRET_KEY = config("DJANGO_SECRET_KEY") 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get("DJANGO_DEBUG")).lower() == "true" 
+# DEBUG = str(os.environ.get("DJANGO_DEBUG")).lower() == "true" 
+DEBUG = config("DJANGO_DEBUG", cast=bool)
 
+print('DEBUG', DEBUG)
 
 
 ALLOWED_HOSTS = [
